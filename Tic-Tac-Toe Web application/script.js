@@ -7,7 +7,6 @@ let scoreX = 0;
 let scoreO = 0;
 let isAIEnabled = false;
 
-// Create the game board
 function createBoard() {
     board.innerHTML = '';
     gameState.forEach((_, index) => {
@@ -19,7 +18,6 @@ function createBoard() {
     });
 }
 
-// Highlight winning combination
 function highlightWinningCombination(combination) {
     combination.forEach(index => {
         const cell = board.children[index];
@@ -27,7 +25,6 @@ function highlightWinningCombination(combination) {
     });
 }
 
-// Check for a winner
 function checkWinner() {
     const winningCombinations = [
         [0, 1, 2], [3, 4, 5], [6, 7, 8],
@@ -45,7 +42,6 @@ function checkWinner() {
     return false;
 }
 
-// Update the score
 function updateScore() {
     if (currentPlayer === 'X') {
         scoreX++;
@@ -56,7 +52,6 @@ function updateScore() {
     }
 }
 
-// Handle user clicks
 function handleCellClick(event) {
     const cell = event.target;
     const index = cell.dataset.index;
@@ -82,11 +77,10 @@ function handleCellClick(event) {
     message.textContent = `Player ${currentPlayer}'s turn`;
 
     if (isAIEnabled && currentPlayer === 'O') {
-        setTimeout(makeAIMove, 500); // AI makes a move after a short delay
+        setTimeout(makeAIMove, 500);
     }
 }
 
-// Make a move
 function makeMove(index, player) {
     gameState[index] = player;
     const cell = board.children[index];
@@ -94,7 +88,6 @@ function makeMove(index, player) {
     cell.classList.add('taken');
 }
 
-// Simple AI logic
 function makeAIMove() {
     const bestMove = findBestMove();
     if (bestMove !== null) {
@@ -115,7 +108,6 @@ function makeAIMove() {
     message.textContent = `Player ${currentPlayer}'s turn`;
 }
 
-// Find the best move for AI
 function findBestMove() {
     const winningCombinations = [
         [0, 1, 2], [3, 4, 5], [6, 7, 8],
@@ -134,7 +126,6 @@ function findBestMove() {
     return gameState.findIndex(cell => cell === null);
 }
 
-// Reset the game
 function resetGame() {
     currentPlayer = 'X';
     gameState = Array(9).fill(null);
@@ -142,7 +133,6 @@ function resetGame() {
     createBoard();
 }
 
-// Toggle AI mode
 function toggleAI() {
     isAIEnabled = playWithAI.checked;
     resetGame();
