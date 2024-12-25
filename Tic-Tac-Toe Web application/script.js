@@ -138,5 +138,4 @@ function toggleAI() {
     resetGame();
 }
 
-// Initialize the game
 createBoard();
